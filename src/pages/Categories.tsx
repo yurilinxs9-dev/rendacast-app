@@ -4,8 +4,10 @@ import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
 
 const Categories = () => {
+  const { t } = useTranslation(['categories', 'common']);
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedGenre = searchParams.get("genre");
   
@@ -81,7 +83,7 @@ const Categories = () => {
       
       <main className="pt-24 pb-20">
         <div className="container mx-auto px-4 md:px-8">
-          <h1 className="text-3xl md:text-4xl font-bold mb-8">Categorias</h1>
+          <h1 className="text-3xl md:text-4xl font-bold mb-8">{t('categories:title')}</h1>
           
           {/* Genre Filter Buttons */}
           <div className="flex flex-wrap gap-2 mb-8">
@@ -90,7 +92,7 @@ const Categories = () => {
               onClick={() => handleGenreClick(null)}
               className="rounded-full"
             >
-              Todos os Gêneros
+              {t('categories:allGenres')}
             </Button>
             {genres.map((genre) => (
               <Button
@@ -107,17 +109,17 @@ const Categories = () => {
           {/* Results */}
           {loading ? (
             <div className="py-20 text-center">
-              <p className="text-muted-foreground">Carregando audiobooks...</p>
+              <p className="text-muted-foreground">{t('categories:loading')}</p>
             </div>
           ) : audiobooks.length > 0 ? (
             <CategoryRow
-              title={selectedGenre ? `Gênero: ${selectedGenre}` : "Todos os Audiobooks"}
+              title={selectedGenre ? `${t('categories:genre')}: ${selectedGenre}` : t('home:sections.allAudiobooks')}
               audiobooks={audiobooks}
             />
           ) : (
             <div className="py-20 text-center">
               <p className="text-muted-foreground">
-                Nenhum audiobook encontrado{selectedGenre ? ` em ${selectedGenre}` : ''}.
+                {t('categories:noAudiobooks')}{selectedGenre ? ` ${t('categories:in')} ${selectedGenre}` : ''}.
               </p>
             </div>
           )}

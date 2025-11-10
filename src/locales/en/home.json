@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "continueListening": "▶️ Continue Listening",
+    "featured": "⭐ Featured",
+    "myAudiobooks": "My Audiobooks",
+    "allAudiobooks": "All Audiobooks"
+  },
+  "messages": {
+    "loading": "Loading audiobooks...",
+    "noAudiobooks": "No audiobooks available yet.",
+    "uploadToStart": "Upload audiobooks to get started!"
+  },
+  "mostRead": "Most Read"
+}

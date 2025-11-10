@@ -5,6 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useAdmin } from "@/hooks/useAdmin";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { LanguageSelector } from "@/components/LanguageSelector";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,6 +26,7 @@ export const Header = () => {
   const { user, signOut } = useAuth();
   const { isAdmin } = useAdmin();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -44,15 +47,15 @@ export const Header = () => {
           
           <nav className="hidden md:flex items-center gap-6">
             <Link to="/" className="text-sm hover:text-primary transition-colors">
-              Início
+              {t('navigation.home')}
             </Link>
             {user && (
               <>
                 <Link to="/categories" className="text-sm hover:text-primary transition-colors">
-                  Categorias
+                  {t('navigation.categories')}
                 </Link>
                 <Link to="/my-audiobooks" className="text-sm hover:text-primary transition-colors">
-                  Minha Biblioteca
+                  {t('navigation.myLibrary')}
                 </Link>
               </>
             )}
@@ -65,7 +68,7 @@ export const Header = () => {
               <form onSubmit={handleSearch} className="hidden lg:flex items-center gap-2 bg-secondary rounded-full px-4 py-2">
                 <Search className="w-4 h-4 text-muted-foreground" />
                 <Input
-                  placeholder="Buscar audiobooks..."
+                  placeholder={t('search.placeholder')}
                   className="border-0 bg-transparent focus-visible:ring-0 w-64"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
@@ -83,6 +86,8 @@ export const Header = () => {
             </>
           )}
           
+          <LanguageSelector />
+          
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -95,31 +100,31 @@ export const Header = () => {
                   <>
                     <DropdownMenuItem onClick={() => navigate('/admin')}>
                       <Shield className="w-4 h-4 mr-2" />
-                      Painel Admin
+                      {t('navigation.adminPanel')}
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={() => navigate('/my-audiobooks')}>
                       <Music className="w-4 h-4 mr-2" />
-                      Meus Audiobooks
+                      {t('navigation.myAudiobooks')}
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={() => navigate('/upload')}>
                       <Upload className="w-4 h-4 mr-2" />
-                      Enviar Audiobook
+                      {t('navigation.uploadAudiobook')}
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
                   </>
                 )}
                 <DropdownMenuItem onClick={() => navigate('/favorites')}>
                   <Heart className="w-4 h-4 mr-2" />
-                  Favoritos
+                  {t('navigation.favorites')}
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => navigate('/lists')}>
                   <FolderOpen className="w-4 h-4 mr-2" />
-                  Minhas Coleções
+                  {t('navigation.myCollections')}
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={() => signOut()}>
                   <LogOut className="w-4 h-4 mr-2" />
-                  Sair
+                  {t('buttons.logout')}
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -128,7 +133,7 @@ export const Header = () => {
               onClick={() => navigate('/auth')}
               className="gradient-hero border-0 h-10"
             >
-              Entrar
+              {t('buttons.login')}
             </Button>
           )}
           
@@ -148,7 +153,7 @@ export const Header = () => {
                   className="text-base hover:text-primary transition-colors py-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Início
+                  {t('navigation.home')}
                 </Link>
                 {user && (
                   <>
@@ -157,14 +162,14 @@ export const Header = () => {
                       className="text-base hover:text-primary transition-colors py-2"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      Categorias
+                      {t('navigation.categories')}
                     </Link>
                     <Link 
                       to="/my-audiobooks" 
                       className="text-base hover:text-primary transition-colors py-2"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      Minha Biblioteca
+                      {t('navigation.myLibrary')}
                     </Link>
                     <Link 
                       to="/favorites" 
@@ -172,7 +177,7 @@ export const Header = () => {
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <Heart className="w-4 h-4" />
-                      Favoritos
+                      {t('navigation.favorites')}
                     </Link>
                     <Link 
                       to="/lists" 
@@ -180,7 +185,7 @@ export const Header = () => {
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <FolderOpen className="w-4 h-4" />
-                      Minhas Coleções
+                      {t('navigation.myCollections')}
                     </Link>
                     <div className="border-t border-border my-2" />
                     <button 
@@ -191,7 +196,7 @@ export const Header = () => {
                       className="text-base hover:text-primary transition-colors py-2 flex items-center gap-2 text-left"
                     >
                       <LogOut className="w-4 h-4" />
-                      Sair
+                      {t('buttons.logout')}
                     </button>
                   </>
                 )}

@@ -6,8 +6,10 @@ import { useEffect, useState } from "react";
 import { useUserStatus } from "@/hooks/useUserStatus";
 import { AccessDenied } from "@/components/AccessDenied";
 import { useContinueListening } from "@/hooks/useContinueListening";
+import { useTranslation } from "react-i18next";
 
 const Index = () => {
+  const { t } = useTranslation(['home', 'common']);
   const [myAudiobooksByCategory, setMyAudiobooksByCategory] = useState<Record<string, any[]>>({});
   const [globalAudiobooksByCategory, setGlobalAudiobooksByCategory] = useState<Record<string, any[]>>({});
   const [featuredAudiobooks, setFeaturedAudiobooks] = useState<any[]>([]);
@@ -131,14 +133,14 @@ const Index = () => {
         <div className="space-y-8 pb-20">
           {loading ? (
             <div className="container mx-auto px-4 md:px-8 py-20 text-center">
-              <p className="text-muted-foreground">Carregando audiobooks...</p>
+              <p className="text-muted-foreground">{t('home:messages.loading')}</p>
             </div>
           ) : (
             <>
               {/* Continue Escutando */}
               {!continueLoading && continueListening.length > 0 && (
                 <CategoryRow 
-                  title="▶️ Continue Escutando" 
+                  title={t('home:sections.continueListening')}
                   audiobooks={continueListening}
                   topAudiobookIds={topAudiobookIds}
                 />
@@ -147,7 +149,7 @@ const Index = () => {
               {/* Audiobooks em Destaque */}
               {featuredAudiobooks.length > 0 && (
                 <CategoryRow 
-                  title="⭐ Em Destaque" 
+                  title={t('home:sections.featured')}
                   audiobooks={featuredAudiobooks}
                   topAudiobookIds={topAudiobookIds}
                 />
@@ -161,7 +163,7 @@ const Index = () => {
                     .map((category) => (
                       <CategoryRow
                         key={`my-${category}`}
-                        title={`Meus Audiobooks - ${category}`}
+                        title={`${t('home:sections.myAudiobooks')} - ${category}`}
                         audiobooks={myAudiobooksByCategory[category]}
                         topAudiobookIds={topAudiobookIds}
                       />
@@ -187,8 +189,8 @@ const Index = () => {
                 Object.keys(myAudiobooksByCategory).length === 0 && 
                 !featuredAudiobooks.length && (
                   <div className="container mx-auto px-4 md:px-8 py-20 text-center">
-                    <p className="text-muted-foreground">Nenhum audiobook disponível ainda.</p>
-                    <p className="text-sm text-muted-foreground mt-2">Faça upload de audiobooks para começar!</p>
+                    <p className="text-muted-foreground">{t('home:messages.noAudiobooks')}</p>
+                    <p className="text-sm text-muted-foreground mt-2">{t('home:messages.uploadToStart')}</p>
                   </div>
                 )
               )}

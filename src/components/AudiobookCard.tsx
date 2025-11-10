@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFavorites } from "@/hooks/useFavorites";
 import { useAuth } from "@/hooks/useAuth";
+import { useTranslation } from "react-i18next";
 
 interface AudiobookCardProps {
   id: string;
@@ -27,6 +28,7 @@ export const AudiobookCard = ({
   viewCount,
   isTopRated,
 }: AudiobookCardProps) => {
+  const { t } = useTranslation('home');
   const [isHovered, setIsHovered] = useState(false);
   const [imageError, setImageError] = useState(false);
   const navigate = useNavigate();
@@ -69,7 +71,7 @@ export const AudiobookCard = ({
             variant="default"
           >
             <TrendingUp className="w-3 h-3 mr-1" />
-            Mais Lido
+            {t('mostRead')}
           </Badge>
         )}
         
