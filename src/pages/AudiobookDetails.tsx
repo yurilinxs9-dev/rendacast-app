@@ -32,6 +32,7 @@ import { useUserStatus } from "@/hooks/useUserStatus";
 import { AccessDenied } from "@/components/AccessDenied";
 import { useProgress } from "@/hooks/useProgress";
 import { useOptimizedStreaming } from "@/hooks/useOptimizedStreaming";
+import { SEO } from "@/components/SEO";
 
 // Audio player with speed control and synchronized subtitles
 const AudiobookDetails = () => {
@@ -469,6 +470,16 @@ const AudiobookDetails = () => {
 
   return (
     <>
+      <SEO 
+        title={audiobook.title}
+        description={audiobook.description || `Ouça ${audiobook.title} de ${audiobook.author}. Streaming instantâneo e sem buffering.`}
+        type="audiobook"
+        image={audiobook.cover_url}
+        author={audiobook.author}
+        audioUrl={streaming.url || undefined}
+        duration={audiobook.duration_seconds}
+        keywords={[audiobook.title, audiobook.author, audiobook.genre || 'audiobook', 'streaming', 'listenflow']}
+      />
       {showPdfViewer && (
         <PdfViewer
           pdfUrl="https://pdfobject.com/pdf/sample.pdf"

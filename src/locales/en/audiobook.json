@@ -1,0 +1,15 @@
+{
+  "title": "Audiobook",
+  "play": "Play",
+  "pause": "Pause",
+  "loading": "Loading...",
+  "chapters": "Chapters",
+  "reviews": "Reviews",
+  "addToList": "Add to list",
+  "share": "Share",
+  "favorite": "Favorite",
+  "duration": "Duration",
+  "narrator": "Narrator",
+  "author": "Author",
+  "genre": "Genre"
+}

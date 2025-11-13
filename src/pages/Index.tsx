@@ -7,6 +7,7 @@ import { useUserStatus } from "@/hooks/useUserStatus";
 import { AccessDenied } from "@/components/AccessDenied";
 import { useContinueListening } from "@/hooks/useContinueListening";
 import { useTranslation } from "react-i18next";
+import { SEO } from "@/components/SEO";
 
 const Index = () => {
   const { t } = useTranslation(['home', 'common']);
@@ -125,6 +126,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO 
+        title={t('home.title', 'Página Inicial')}
+        description={t('home.seoDescription', 'Descubra milhares de audiobooks premium em português e inglês. Streaming instantâneo com tecnologia de carregamento ultra-rápido. Funciona perfeitamente em WiFi e 4G.')}
+        keywords={['audiobooks', 'audiolivros', 'streaming', 'português', 'inglês', 'listenflow']}
+      />
       <Header />
       
       <main className="pt-16">

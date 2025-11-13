@@ -223,17 +223,28 @@ export const useOptimizedStreaming = ({
         document.head.removeChild(prefetchLinkRef.current);
       }
 
-      // Criar link de preload para o áudio
+      // Criar link de PRELOAD (não prefetch) para carregamento ULTRA-RÁPIDO
       const link = document.createElement('link');
       link.rel = 'preload';
-      link.as = 'audio';
+      link.as = 'fetch';
       link.href = url;
       link.crossOrigin = 'anonymous';
+      // @ts-ignore - setAttribute para prioridade alta
+      link.setAttribute('importance', 'high');
       
       document.head.appendChild(link);
       prefetchLinkRef.current = link;
       
-      console.log('[OptimizedStreaming] 🔥 Prefetch do áudio iniciado');
+      console.log('[OptimizedStreaming] ⚡ PRELOAD AGRESSIVO do áudio iniciado (alta prioridade)');
+      
+      // Também enviar para service worker para cache agressivo de chunks
+      if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+        navigator.serviceWorker.controller.postMessage({
+          type: 'PREFETCH_AUDIO_CHUNKS',
+          url
+        });
+        console.log('[OptimizedStreaming] 📦 Solicitando prefetch de 5MB ao Service Worker');
+      }
     } catch (error) {
       console.error('[OptimizedStreaming] Erro no prefetch:', error);
     }
