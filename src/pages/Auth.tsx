@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Mail, Lock, User } from 'lucide-react';
+import { Mail, Lock, User, Check } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
+import { useTranslation } from 'react-i18next';
 
 const Auth = () => {
+  const { t } = useTranslation();
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -46,10 +48,10 @@ const Auth = () => {
       <div className="w-full max-w-md space-y-8 animate-fade-in">
         <div className="text-center">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-[#8B0000] via-[#DC143C] to-[#FF8C00] bg-clip-text text-transparent tracking-tight mb-6">
-            RendaCast
+            {t('auth.title')}
           </h1>
           <p className="text-muted-foreground">
-            {isLogin ? 'Entre na sua conta' : 'Crie sua conta'}
+            {isLogin ? t('auth.login.subtitle') : t('auth.signup.subtitle')}
           </p>
         </div>
 
@@ -59,12 +61,12 @@ const Auth = () => {
               <div className="space-y-2">
                 <Label htmlFor="name" className="flex items-center gap-2">
                   <User className="w-4 h-4" />
-                  Nome
+                  {t('auth.fields.name')}
                 </Label>
                 <Input
                   id="name"
                   type="text"
-                  placeholder="Seu nome"
+                  placeholder={t('auth.fields.namePlaceholder')}
                   value={displayName}
                   onChange={(e) => setDisplayName(e.target.value)}
                   required={!isLogin}
@@ -76,12 +78,12 @@ const Auth = () => {
             <div className="space-y-2">
               <Label htmlFor="email" className="flex items-center gap-2">
                 <Mail className="w-4 h-4" />
-                Email
+                {t('auth.fields.email')}
               </Label>
               <Input
                 id="email"
                 type="email"
-                placeholder="seu@email.com"
+                placeholder={t('auth.fields.emailPlaceholder')}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -92,18 +94,43 @@ const Auth = () => {
             <div className="space-y-2">
               <Label htmlFor="password" className="flex items-center gap-2">
                 <Lock className="w-4 h-4" />
-                Senha
+                {t('auth.fields.password')}
               </Label>
               <Input
                 id="password"
                 type="password"
-                placeholder="••••••••"
+                placeholder={t('auth.fields.passwordPlaceholder')}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                minLength={6}
+                minLength={8}
                 className="bg-background/50"
               />
+              {!isLogin && (
+                <div className="mt-3 p-3 rounded-lg bg-muted/50 border border-border/50">
+                  <p className="text-xs font-medium text-foreground mb-2">
+                    {t('auth.passwordRequirements.title')}
+                  </p>
+                  <ul className="space-y-1">
+                    <li className="flex items-center gap-2 text-xs text-muted-foreground">
+                      <Check className="w-3 h-3 text-primary" />
+                      {t('auth.passwordRequirements.minLength')}
+                    </li>
+                    <li className="flex items-center gap-2 text-xs text-muted-foreground">
+                      <Check className="w-3 h-3 text-primary" />
+                      {t('auth.passwordRequirements.lowercase')}
+                    </li>
+                    <li className="flex items-center gap-2 text-xs text-muted-foreground">
+                      <Check className="w-3 h-3 text-primary" />
+                      {t('auth.passwordRequirements.uppercase')}
+                    </li>
+                    <li className="flex items-center gap-2 text-xs text-muted-foreground">
+                      <Check className="w-3 h-3 text-primary" />
+                      {t('auth.passwordRequirements.number')}
+                    </li>
+                  </ul>
+                </div>
+              )}
             </div>
 
             <Button
@@ -112,10 +139,10 @@ const Auth = () => {
               disabled={isSubmitting}
             >
               {isSubmitting
-                ? 'Carregando...'
+                ? t('auth.loading')
                 : isLogin
-                ? 'Entrar'
-                : 'Criar Conta'}
+                ? t('auth.login.button')
+                : t('auth.signup.button')}
             </Button>
           </form>
 
@@ -124,16 +151,16 @@ const Auth = () => {
               onClick={() => setIsLogin(!isLogin)}
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
-              {isLogin ? 'Não tem uma conta? ' : 'Já tem uma conta? '}
+              {isLogin ? t('auth.toggle.noAccount') : t('auth.toggle.hasAccount')}
               <span className="text-primary font-semibold">
-                {isLogin ? 'Criar conta' : 'Entrar'}
+                {isLogin ? t('auth.toggle.createAccount') : t('auth.toggle.login')}
               </span>
             </button>
           </div>
         </div>
 
         <p className="text-center text-sm text-muted-foreground">
-          Ao continuar, você concorda com nossos Termos de Serviço e Política de Privacidade
+          {t('auth.terms')}
         </p>
       </div>
     </div>
