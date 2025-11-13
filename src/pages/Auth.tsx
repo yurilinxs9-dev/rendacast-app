@@ -3,10 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Mail, Lock, User } from 'lucide-react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Mail, Lock, User, MessageCircle, CheckCircle2 } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
+import { useTranslation } from 'react-i18next';
 
 const Auth = () => {
+  const { t } = useTranslation();
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -101,9 +104,34 @@ const Auth = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                minLength={6}
+                minLength={8}
                 className="bg-background/50"
               />
+              {!isLogin && (
+                <Alert className="mt-2 bg-muted/50 border-border">
+                  <AlertDescription className="text-xs space-y-1">
+                    <p className="font-medium text-foreground mb-1.5">
+                      {t('common.auth.passwordRequirements')}
+                    </p>
+                    <div className="flex items-center gap-1.5 text-muted-foreground">
+                      <CheckCircle2 className="w-3 h-3" />
+                      <span>{t('common.auth.minLength')}</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-muted-foreground">
+                      <CheckCircle2 className="w-3 h-3" />
+                      <span>{t('common.auth.lowercase')}</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-muted-foreground">
+                      <CheckCircle2 className="w-3 h-3" />
+                      <span>{t('common.auth.uppercase')}</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-muted-foreground">
+                      <CheckCircle2 className="w-3 h-3" />
+                      <span>{t('common.auth.number')}</span>
+                    </div>
+                  </AlertDescription>
+                </Alert>
+              )}
             </div>
 
             <Button
@@ -135,6 +163,17 @@ const Auth = () => {
         <p className="text-center text-sm text-muted-foreground">
           Ao continuar, você concorda com nossos Termos de Serviço e Política de Privacidade
         </p>
+
+        {/* WhatsApp Support Button */}
+        <a
+          href="https://wa.me/5537991048239"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group"
+        >
+          <MessageCircle className="w-4 h-4 text-green-500 group-hover:scale-110 transition-transform" />
+          <span>{t('common.auth.whatsappSupport')}</span>
+        </a>
       </div>
     </div>
   );
