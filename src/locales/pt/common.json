@@ -6,20 +6,48 @@
     "cancel": "Cancelar",
     "play": "Reproduzir",
     "pause": "Pausar",
-    "loading": "Carregando..."
+    "loading": "Carregando...",
+    "search": "Buscar",
+    "upload": "Enviar",
+    "edit": "Editar",
+    "delete": "Excluir",
+    "confirm": "Confirmar",
+    "close": "Fechar",
+    "back": "Voltar",
+    "next": "Próximo",
+    "previous": "Anterior",
+    "submit": "Enviar",
+    "update": "Atualizar"
   },
   "navigation": {
     "home": "Início",
     "categories": "Categorias",
     "myLibrary": "Minha Biblioteca",
-    "favorites": "Favoritos"
+    "favorites": "Favoritos",
+    "myCollections": "Minhas Coleções",
+    "adminPanel": "Painel Admin",
+    "myAudiobooks": "Meus Audiobooks",
+    "uploadAudiobook": "Enviar Audiobook"
   },
-  "auth": {
-    "passwordRequirements": "A senha deve conter:",
-    "minLength": "Mínimo 8 caracteres",
-    "lowercase": "Uma letra minúscula",
-    "uppercase": "Uma letra maiúscula",
-    "number": "Um número",
-    "whatsappSupport": "Precisa de ajuda? Fale conosco"
+  "common": {
+    "allGenres": "Todos os Gêneros",
+    "noResults": "Nenhum resultado encontrado",
+    "error": "Erro",
+    "success": "Sucesso",
+    "warning": "Aviso",
+    "info": "Informação",
+    "duration": "Duração",
+    "author": "Autor",
+    "narrator": "Narrador",
+    "genre": "Gênero",
+    "description": "Descrição",
+    "reviews": "Avaliações",
+    "rating": "Avaliação"
+  },
+  "search": {
+    "placeholder": "Buscar audiobooks...",
+    "searching": "Buscando...",
+    "results": "Resultados",
+    "noResults": "Nenhum audiobook encontrado"
   }
 }
